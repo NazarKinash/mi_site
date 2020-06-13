@@ -60,6 +60,7 @@ const CreateForm = () => {
 				<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					type="text"
 					name="name"
 					placeholder="Name"
@@ -71,6 +72,7 @@ const CreateForm = () => {
 				<Input
 					value={formik.values.number}
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					type="tel"
 					name="number"
 					placeholder="Number"

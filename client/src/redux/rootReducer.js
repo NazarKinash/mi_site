@@ -3,12 +3,16 @@ import contacts from "./contacts/contactsReducer";
 import filter from "./filter/filterRedecer";
 import loader from "./loader/loaderReducer";
 import error from "./error/errorReducer";
+import user from "./user/userReducer";
+import token from "./token/tokenReducer";
 
 const rootReducer = combineReducers({
-	contacts: contacts,
-	filter: filter,
-	loader: loader,
-	error: error,
+	contacts,
+	filter,
+	loader,
+	error,
+	user,
+	token,
 });
 
 export default rootReducer;

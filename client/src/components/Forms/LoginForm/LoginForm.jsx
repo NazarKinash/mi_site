@@ -1,9 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
+import { validate } from "./validate";
 
-import formStyles from "../Form.module.css";
 import Input from "../../../common/Input/Input";
 import Button from "../../../common/Button/Button";
+
+import formStyles from "../Form.module.css";
 
 const LoginForm = () => {
 	const formik = useFormik({
@@ -13,6 +15,7 @@ const LoginForm = () => {
 		},
 
 		onSubmit: () => {},
+		validate,
 	});
 
 	return (
@@ -30,19 +33,22 @@ const LoginForm = () => {
 					placeholder="user@email.com"
 					labelText="Login"
 				/>
-				{formik.touched.name && formik.errors.name ? (
-					<div className={formStyles.Notification}>{formik.errors.name}</div>
+				{formik.touched.login && formik.errors.login ? (
+					<div className={formStyles.Notification}>{formik.errors.login}</div>
 				) : null}
 				<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					type="password"
 					name="password"
 					placeholder="Your password."
 					labelText="Password"
 				/>
-				{formik.touched.name && formik.errors.name ? (
-					<div className={formStyles.Notification}>{formik.errors.name}</div>
+				{formik.touched.password && formik.errors.password ? (
+					<div className={formStyles.Notification}>
+						{formik.errors.password}
+					</div>
 				) : null}
 				<Button type="submit" title="Log in" />
 			</form>
