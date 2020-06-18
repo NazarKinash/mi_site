@@ -1,5 +1,5 @@
 //Code
-import React from "react";
+import React, { useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
 //Components
@@ -13,7 +13,10 @@ import {
 } from "../../redux/filter/filterSelectors";
 import { loaderSelector } from "../../redux/loader/loaderSelectors";
 import { errorSelector } from "../../redux/error/errorSelectors";
-import { asyncRemoveContact } from "../../redux/contacts/contactsAction";
+import {
+	asyncRemoveContact,
+	asyncGetContacts,
+} from "../../redux/operation/operation";
 //styles
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import styles from "./ContactList.module.css";
@@ -30,11 +33,21 @@ const ContactList = () => {
 	const dispatch = useDispatch();
 
 	const deleteItem = (e) => {
-		dispatch(asyncRemoveContact(Number(e.target.id)));
+		dispatch(asyncRemoveContact("contacts", e.target.id));
 	};
+
+	useEffect(() => {
+		dispatch(asyncGetContacts("contacts"));
+	}, [dispatch]);
 
 	return (
 		<>
+			<div className={styles["loader-container"]}>
+				{!!contactsList.length && <h2>My contacts</h2>}{" "}
+				{loader && (
+					<Loader type="ThreeDots" color="#03059b" height={50} width={50} />
+				)}
+			</div>
 			<TransitionGroup component="ul" className={styles["contact-list"]}>
 				{(filterValue ? filteredContacts : contactsList).map((contact) => (
 					<CSSTransition key={contact.id} timeout={250} classNames="list__item">
@@ -52,9 +65,7 @@ const ContactList = () => {
 					</CSSTransition>
 				))}
 			</TransitionGroup>
-			{loader && (
-				<Loader type="ThreeDots" color="#03059b" height={50} width={50} />
-			)}
+
 			<TransitionWrapper action={!!error} clases="error" time={350}>
 				<Error error={error} />
 			</TransitionWrapper>

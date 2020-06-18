@@ -4,10 +4,10 @@ body {
 }
 
 .App {
-	margin: 0 auto;
+	/* margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: center; */
 }
 
 .logo-enter {
@@ -33,15 +33,17 @@ body {
 }
 
 /* Filter animation */
-
+.createForm-enter-active,
 .error-enter-active,
 .filter-enter-active {
-	animation: el-enter 250ms ease-in;
+	animation: el-enter 250ms ease;
 	opacity: 1;
 }
+
+.createForm-exit-active,
 .error-exit-active,
 .filter-exit-active {
-	animation: el-exite 250ms ease-out;
+	animation: el-exite 250ms ease;
 	opacity: 0;
 }
 

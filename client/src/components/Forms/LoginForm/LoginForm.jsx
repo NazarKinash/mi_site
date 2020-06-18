@@ -1,27 +1,32 @@
 import React from "react";
 import { useFormik } from "formik";
 import { validate } from "./validate";
+import { useDispatch } from "react-redux";
 
 import Input from "../../../common/Input/Input";
 import Button from "../../../common/Button/Button";
 
 import formStyles from "../Form.module.css";
+import { loginUser } from "../../../redux/operation/operation";
 
 const LoginForm = () => {
+	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
-			login: "",
+			email: "",
 			password: "",
 		},
 
-		onSubmit: () => {},
+		onSubmit: (values) => {
+			dispatch(loginUser(values));
+		},
 		validate,
 	});
 
 	return (
 		<>
 			<form
-				className={formStyles["contact-form"]}
+				className={formStyles["form"]}
 				autoComplete="off"
 				onSubmit={formik.handleSubmit}
 			>
@@ -29,12 +34,12 @@ const LoginForm = () => {
 					value={formik.values.name}
 					onChange={formik.handleChange}
 					type="email"
-					name="login"
+					name="email"
 					placeholder="user@email.com"
 					labelText="Login"
 				/>
-				{formik.touched.login && formik.errors.login ? (
-					<div className={formStyles.Notification}>{formik.errors.login}</div>
+				{formik.touched.email && formik.errors.enail ? (
+					<div className={formStyles.Notification}>{formik.errors.enail}</div>
 				) : null}
 				<Input
 					value={formik.values.name}

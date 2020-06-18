@@ -1,11 +1,11 @@
 export const validate = (values) => {
 	const errors = {};
 
-	if (!values.userName) {
-		errors.userName = "Required";
-	} else if (values.userName.length < 4) {
-		errors.userName = "Name must have 4 symbols or more";
-	}
+	// if (!values.userName) {
+	// 	errors.userName = "Required";
+	// } else if (values.userName.length < 4) {
+	// 	errors.userName = "Name must have 4 symbols or more";
+	// }
 
 	if (!values.email) {
 		errors.email = "Required";

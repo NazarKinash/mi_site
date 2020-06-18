@@ -7,6 +7,8 @@ import styles from "./Header.module.css";
 import TransitionWrapper from "../TransitionWeapper/TransitionWrapper";
 import { useSelector } from "react-redux";
 import { isAuth } from "../../redux/user/selectors";
+import defaultAvatar from "../../img/default_avatar.jpg";
+import { auth } from "../../configFB";
 
 const Header = () => {
 	const isAuthUser = useSelector((state) => isAuth(state));
@@ -23,6 +25,10 @@ const Header = () => {
 		};
 	}, [logo]);
 
+	const userSignOut = () => {
+		auth.signOut();
+	};
+
 	return (
 		<>
 			<header className={styles.Header}>
@@ -31,10 +37,15 @@ const Header = () => {
 						<Logo />
 					</Link>
 				</TransitionWrapper>
+
+				<Link to="/profile">
+					<img src={defaultAvatar} alt="Avatar" width={50} height={50} />
+				</Link>
+
 				{isAuthUser ? (
 					<nav className={styles.Nav}>
 						<NavLink to="/login" className={styles.NavLink}>
-							Sign Out
+							<span onClick={userSignOut}>Sign Out</span>
 						</NavLink>
 					</nav>
 				) : (
@@ -53,3 +64,5 @@ const Header = () => {
 };
 
 export default Header;
+
+// // An unautoriaed user will see this markup !!!!!!!!!!!!

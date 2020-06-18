@@ -1,38 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+// import { auth } from "../../../configFB";
 
 import Input from "../../../common/Input/Input";
 import Button from "../../../common/Button/Button";
 
 import { validate } from "./validate";
-import { signUp } from "../../../redux/operation/register";
+import { registerUser } from "../../../redux/operation/operation";
 
 import formStyles from "../Form.module.css";
+// import { setUser } from "../../../redux/user/userAction";
 
 function RegisterForm({ inputHandler }) {
 	const dispatch = useDispatch();
 
 	const formik = useFormik({
 		initialValues: {
-			userName: "",
+			// userName: "",
 			email: "",
 			password: "",
 		},
 		onSubmit: (values) => {
-			dispatch(signUp(values));
+			console.log(values);
+			sub(values);
 		},
 		validate,
 	});
 
+	const sub = (val) => {
+		dispatch(registerUser(val));
+	};
+
 	return (
 		<>
 			<form
-				className={formStyles["contact-form"]}
+				className={formStyles["form"]}
 				autoComplete="off"
 				onSubmit={formik.handleSubmit}
 			>
-				<Input
+				{/*	<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -45,7 +52,7 @@ function RegisterForm({ inputHandler }) {
 					<div className={formStyles.Notification}>
 						{formik.errors.userName}
 					</div>
-				) : null}
+				) : null} */}
 				<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}

@@ -1,22 +1,19 @@
 //Code
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 
 //Components
 import Input from "../../../common/Input/Input";
 import Button from "../../../common/Button/Button";
-import Alert from "../../../common/Alert/Alert";
 //Instruments
 import { validate } from "./validate";
-import { asyncAddContact } from "../../../redux/contacts/contactsAction";
+import { asyncAddContact } from "../../../redux/operation/operation";
 //Styles
 import formStyles from "../Form.module.css";
-import TransitionWrapper from "../../TransitionWeapper/TransitionWrapper";
 
 const CreateForm = () => {
 	const dispatch = useDispatch();
-	const contactsList = useSelector((state) => state.contacts);
 
 	const formik = useFormik({
 		initialValues: {
@@ -24,36 +21,17 @@ const CreateForm = () => {
 			number: "",
 		},
 		onSubmit: (values) => {
-			if (isAlredyInContacts(values)) {
-				return;
-			}
-			dispatch(asyncAddContact(values));
-			formik.handleReset();
+			console.log(values);
+			dispatch(asyncAddContact("contacts", values));
 		},
 
 		validate,
 	});
 
-	const [massage, setMassage] = useState("");
-	const isAlredyInContacts = (newContact) => {
-		if (
-			contactsList.find(({ name }) => name.trim() === newContact.name.trim())
-		) {
-			setMassage(`${newContact.name} is alredy in contacts`);
-			setTimeout(() => {
-				setMassage("");
-			}, 3000);
-			return true;
-		}
-	};
-
 	return (
 		<>
-			<TransitionWrapper action={!!massage} time={250} clases="alert">
-				<Alert setMassage={setMassage} text={massage} />
-			</TransitionWrapper>
 			<form
-				className={formStyles["contact-form"]}
+				className={formStyles["form"]}
 				autoComplete="off"
 				onSubmit={formik.handleSubmit}
 			>

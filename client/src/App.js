@@ -5,28 +5,38 @@ import Header from "./components/Header/Header";
 import RegisterForm from "./components/Forms/RegisterForm/RegisterForm";
 import LoginForm from "./components/Forms/LoginForm/LoginForm";
 import { Switch, Route, useHistory } from "react-router-dom";
-import PrivateRoute from "./components/PrivatRoute/PrivateRoute";
-import { useSelector } from "react-redux";
-import { isAuth } from "./redux/user/selectors";
+import { useDispatch } from "react-redux";
+import UserProfile from "./containers/UserProfile/UserProfile";
+
+import { auth } from "./configFB";
+import { setUser } from "./redux/user/userAction";
 
 const App = () => {
-	const isAuthUser = useSelector((state) => isAuth(state));
+	console.log(auth.currentUser);
+
+	const dispatch = useDispatch();
 	const history = useHistory();
-	console.log(history);
 
 	useEffect(() => {
-		if (isAuthUser) {
-			history.replace("/");
-		}
-	}, [isAuthUser]);
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				history.replace("/");
+				dispatch(setUser(user.email));
+			} else {
+				history.replace("/login");
+				dispatch(setUser(user));
+			}
+		});
+	}, [dispatch, history]);
 
 	return (
 		<div className="App">
 			<Header />
 			<Switch>
-				<PrivateRoute exact path="/" component={Phonebook} />
+				<Route exact path="/" component={Phonebook} />
 				<Route path="/login" component={LoginForm} />
 				<Route path="/signUp" component={RegisterForm} />
+				<Route path="/profile" component={UserProfile} />
 			</Switch>
 		</div>
 	);

@@ -5,6 +5,12 @@
 	margin: 0;
 }
 
+.loader-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .contact-list__item {
 	width: 100%;
 	padding: 12px;
