@@ -46,7 +46,7 @@ server.post("/register", async (req, res) => {
 		// 2. If not user exist already, hash the password
 		const hashedPassword = await hash(password, 10);
 		// 3. Insert the user in "database"
-		const createdUser = { id: fakeDB.length, email };
+		const createdUser = { id: fakeDB.length, email, userName, contacts: [] };
 		const accesstoken = createAccessToken(createdUser.id);
 		createdUser.token = accesstoken;
 
