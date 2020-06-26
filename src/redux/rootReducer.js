@@ -4,7 +4,7 @@ import filter from "./filter/filterRedecer";
 import loader from "./loader/loaderReducer";
 import error from "./error/errorReducer";
 import user from "./user/userReducer";
-import token from "./token/tokenReducer";
+import token from "./tokenSlece";
 
 const rootReducer = combineReducers({
 	contacts,

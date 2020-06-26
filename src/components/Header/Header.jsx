@@ -5,12 +5,14 @@ import Logo from "../../common/Logo/Logo";
 
 import styles from "./Header.module.css";
 import TransitionWrapper from "../TransitionWeapper/TransitionWrapper";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { isAuth } from "../../redux/user/selectors";
 import defaultAvatar from "../../img/default_avatar.jpg";
 import { auth } from "../../configFB";
+import { setUser } from "../../redux/user/userAction";
 
 const Header = () => {
+	const dispatch = useDispatch();
 	const isAuthUser = useSelector((state) => isAuth(state));
 
 	const [logo, setLogo] = useState(false);
@@ -27,6 +29,8 @@ const Header = () => {
 
 	const userSignOut = () => {
 		auth.signOut();
+		dispatch(setUser(null));
+		console.log("out");
 	};
 
 	return (
@@ -64,5 +68,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// // An unautoriaed user will see this markup !!!!!!!!!!!!

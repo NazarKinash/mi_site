@@ -20,13 +20,27 @@ import {
 	getSetError,
 	deleteSetError,
 } from "../error/errorAction";
+import { setToken } from "../tokenSlece";
 
-export const registerUser = (user) => async (dispatch) => {
-	const { email, password } = user;
+export const registerUser = (userInfo) => async (dispatch) => {
+	const { email, password, displayName, photoURL } = userInfo;
 	try {
-		const resalt = await auth.createUserWithEmailAndPassword(email, password);
-		const authUser = { email: resalt.user.email };
+		const resalt = {
+			...(await auth.createUserWithEmailAndPassword(email, password)),
+			...(await auth.currentUser.updateProfile({
+				displayName,
+				email,
+				photoURL,
+			})),
+		};
 		console.log(resalt);
+		const authUser = {
+			displayName: resalt.user.displayName,
+			email: resalt.user.email,
+			photoURL: resalt.user.photoURL,
+		};
+		// dispatch(setToken(resalt.user.refreshToken));
+		console.log(resalt.user.refreshToken);
 		dispatch(setUser(authUser));
 	} catch (error) {
 		console.log(error);
@@ -37,8 +51,17 @@ export const loginUser = (user) => async (dispatch) => {
 	const { email, password } = user;
 	try {
 		const resalt = await auth.signInWithEmailAndPassword(email, password);
-		const authUser = { email: resalt.user.email };
+		const authUser = {
+			displayName: resalt.user.displayName,
+			email: resalt.user.email,
+			photoURL: resalt.user.photoURL,
+		};
+		dispatch(setUser(authUser));
+
 		console.log(resalt);
+		dispatch(setToken("kyky"));
+		console.log(resalt.user.refreshToken);
+
 		dispatch(setUser(authUser));
 	} catch (error) {
 		console.log(error);
@@ -86,25 +109,3 @@ export const asyncRemoveContact = (dbName, id) => async (dispactch) => {
 		dispactch(deleteContactsLoaderOff());
 	}
 };
-
-// const options = {
-// 	headers: {
-// 		"Content-Type": "application/json",
-// 	},
-// };
-
-// export const signUp = (formData) => async (dispatch) => {
-// 	const resalt = await axios.post(
-// 		"http://localhost:4000/register",
-// 		formData,
-// 		options
-// 	);
-// 	try {
-// 		const { id, email, token } = resalt.data.user;
-// 		dispatch(setUser({ id, email }));
-// 		dispatch(setToken(token));
-// 		console.log(resalt);
-// 	} catch (r) {
-// 		console.log(resalt.data.error);
-// 	}
-// };

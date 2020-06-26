@@ -8,6 +8,7 @@ import Button from "../../../common/Button/Button";
 
 import { validate } from "./validate";
 import { registerUser } from "../../../redux/operation/operation";
+import defaultAvatar from "../../../img/default_avatar.jpg";
 
 import formStyles from "../Form.module.css";
 // import { setUser } from "../../../redux/user/userAction";
@@ -17,9 +18,10 @@ function RegisterForm({ inputHandler }) {
 
 	const formik = useFormik({
 		initialValues: {
-			// userName: "",
+			displayName: "",
 			email: "",
 			password: "",
+			photoURL: defaultAvatar,
 		},
 		onSubmit: (values) => {
 			console.log(values);
@@ -39,12 +41,12 @@ function RegisterForm({ inputHandler }) {
 				autoComplete="off"
 				onSubmit={formik.handleSubmit}
 			>
-				{/*	<Input
+				<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 					type="text"
-					name="userName"
+					name="displayName"
 					placeholder="User Name"
 					labelText="User Name"
 				/>
@@ -52,7 +54,7 @@ function RegisterForm({ inputHandler }) {
 					<div className={formStyles.Notification}>
 						{formik.errors.userName}
 					</div>
-				) : null} */}
+				) : null}
 				<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}
