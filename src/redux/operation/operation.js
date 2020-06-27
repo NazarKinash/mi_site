@@ -39,9 +39,8 @@ export const registerUser = (userInfo) => async (dispatch) => {
 			email: resalt.user.email,
 			photoURL: resalt.user.photoURL,
 		};
-		// dispatch(setToken(resalt.user.refreshToken));
-		console.log(resalt.user.refreshToken);
 		dispatch(setUser(authUser));
+		dispatch(setToken(resalt.user.refreshToken));
 	} catch (error) {
 		console.log(error);
 	}
@@ -57,12 +56,7 @@ export const loginUser = (user) => async (dispatch) => {
 			photoURL: resalt.user.photoURL,
 		};
 		dispatch(setUser(authUser));
-
-		console.log(resalt);
-		dispatch(setToken("kyky"));
-		console.log(resalt.user.refreshToken);
-
-		dispatch(setUser(authUser));
+		dispatch(setToken(resalt.user.refreshToken));
 	} catch (error) {
 		console.log(error);
 	}

@@ -3,11 +3,13 @@ body {
 	padding: 0;
 }
 
+.container {
+	width: 85%;
+	margin: 0 auto;
+}
+
 .App {
-	/* margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center; */
+	margin: 0 auto;
 }
 
 .logo-enter {
@@ -33,13 +35,14 @@ body {
 }
 
 /* Filter animation */
+.menu-enter-active,
 .createForm-enter-active,
 .error-enter-active,
 .filter-enter-active {
 	animation: el-enter 250ms ease;
 	opacity: 1;
 }
-
+.menu-exit-active,
 .createForm-exit-active,
 .error-exit-active,
 .filter-exit-active {

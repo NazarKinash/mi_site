@@ -17,7 +17,7 @@ const Filter = () => {
 	};
 
 	return (
-		<>
+		<div className={filterStyles.FilterContainer}>
 			<div className={filterStyles.Filter}>
 				<Input
 					value={filterValue}
@@ -28,7 +28,7 @@ const Filter = () => {
 					labelText="Find contacts by name"
 				/>
 			</div>
-		</>
+		</div>
 	);
 };
 

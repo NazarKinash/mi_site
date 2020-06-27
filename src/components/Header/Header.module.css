@@ -1,14 +1,30 @@
 .Header {
 	width: 100%;
 	height: 60px;
+	position: fixed;
+	z-index: 100;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #03059b;
+	background-color: #03059b8f;
 }
 
 .Logo {
 	text-decoration: none;
+}
+
+.user-menu {
+	margin-right: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header__user-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	padding: 6px;
 }
 
 .Nav {

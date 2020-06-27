@@ -13,19 +13,27 @@ import { auth } from "./configFB";
 import { setUser } from "./redux/user/userAction";
 import { isAuth } from "./redux/user/selectors";
 import { token } from "./redux/tokenSlece";
+import { hydrate } from "react-dom";
 
 const App = () => {
-	const isAuthUser = useSelector((state) => token(state));
-	// const dispatch = useDispatch();
+	const isAuthUser = useSelector((state) => isAuth(state));
+	const isTocken = useSelector((state) => token(state));
+	const dispatch = useDispatch();
 	const history = useHistory();
 
 	useEffect(() => {
-		if (!!isAuthUser) {
+		if (!!isTocken) {
+			auth.onAuthStateChanged((user) => dispatch(setUser(user)));
+			// dispatch(setUser(auth.currentUser));
+		}
+	}, [dispatch, history, isTocken]);
+
+	useEffect(() => {
+		if (isAuthUser) {
 			history.replace("/");
 		}
-	}, [history, isAuthUser]);
+	}, [isAuthUser, history]);
 
-	// console.log(auth);
 	return (
 		<div className="App">
 			<Header />

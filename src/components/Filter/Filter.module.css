@@ -1,6 +1,8 @@
+.FilterContainer {
+	padding-top: 100px;
+}
+
 .Filter {
-  margin: 16px 0 0;
-  padding: 0;
-  border: 1px solid #cccccc;
-  box-shadow: -1px 1px 3px #d6d5d5;
+	border: 1px solid #cccccc;
+	box-shadow: -1px 1px 3px #d6d5d5;
 }
