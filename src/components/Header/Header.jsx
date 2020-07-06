@@ -8,9 +8,9 @@ import TransitionWrapper from "../TransitionWeapper/TransitionWrapper";
 import { useSelector } from "react-redux";
 
 import { isAuth, userSelector } from "../../redux/user/selectors";
-import { setUser } from "../../redux/user/userAction";
+// import { setUser } from "../../redux/user/userAction";
 import Menu from "../Menu/Menu";
-import { token } from "../../redux/tokenSlece";
+// import { token } from "../../redux/tokenSlece";
 
 const Header = () => {
 	const isAuthUser = useSelector((state) => isAuth(state));

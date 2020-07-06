@@ -1,0 +1,50 @@
+.NewTodoForm {
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: auto;
+	flex-wrap: wrap;
+}
+.NewTodoForm > * {
+	font-family: inherit;
+	outline: none;
+	border-radius: 1px;
+	padding: 8px 16px;
+}
+.NewTodoForm__name {
+	border: none;
+	background-color: #fff;
+	color: #333;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 4px;
+}
+
+.NewTodoForm__select {
+	border: none;
+	background-color: #fff;
+	color: #333;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 4px;
+	height: 30px;
+}
+
+.NewTodoForm__submit {
+	border: 1px solid #fff;
+	color: #fff;
+	background-color: transparent;
+	margin-left: 16px;
+	user-select: none;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+.NewTodoForm__submit:hover {
+	background-color: #fff;
+	color: #4b67b4;
+}
+
+.confirm {
+	width: 100%;
+}

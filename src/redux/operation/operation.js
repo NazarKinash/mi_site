@@ -21,6 +21,12 @@ import {
 	deleteSetError,
 } from "../error/errorAction";
 import { setToken } from "../tokenSlece";
+import {
+	addTodo,
+	getTodo,
+	removeTodo,
+	updateTodo,
+} from "../todoList/toDoSlice";
 
 export const registerUser = (userInfo) => async (dispatch) => {
 	const { email, password, displayName, photoURL } = userInfo;
@@ -101,5 +107,57 @@ export const asyncRemoveContact = (dbName, id) => async (dispactch) => {
 		dispactch(deleteSetError(`${error.message} - not deleted!`));
 	} finally {
 		dispactch(deleteContactsLoaderOff());
+	}
+};
+
+export const asyncAddTodo = (dbName, data) => async (dispatch) => {
+	// dispatch(addContactLoaderOn());
+
+	try {
+		const resalt = await db.collection(dbName).add(data);
+		const item = { ...data, id: resalt.id };
+		dispatch(addTodo(item));
+	} catch (error) {
+		dispatch(postSetError(`${error.message} - not added`));
+	} finally {
+		// dispatch(addContactLoaderOff());
+	}
+};
+
+export const asyncGetTodo = (dbName) => async (dispactch) => {
+	// dispactch(getContactsLoaderOn());
+	try {
+		const resalt = await db.collection(dbName).get();
+		const resaltData = resalt.docs.map((doc) => ({
+			...doc.data(),
+			id: doc.id,
+		}));
+
+		dispactch(getTodo(resaltData));
+	} catch (error) {
+		dispactch(getSetError(error.message));
+	} finally {
+		// dispactch(getContactsLoaderOff());
+	}
+};
+
+export const asyncRemoveTodo = (dbName, id) => async (dispactch) => {
+	// dispactch(deleteContactsLoaderOn());
+	try {
+		await db.collection(dbName).doc(id).delete();
+		dispactch(removeTodo(id));
+	} catch (error) {
+		dispactch(deleteSetError(`${error.message} - not deleted!`));
+	} finally {
+		// dispactch(deleteContactsLoaderOff());
+	}
+};
+
+export const asyncUpdateTodo = (dbName, id) => async (dispactch) => {
+	try {
+		await db.collection(dbName).doc(id).update({ status: true });
+		dispactch(updateTodo(id));
+	} catch (error) {
+		dispactch(deleteSetError(`${error.message}`));
 	}
 };

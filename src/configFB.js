@@ -19,4 +19,4 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const user = firebase.auth().currentUser;
 
-export { auth, db, user };
+export { auth, db, user, firebase };

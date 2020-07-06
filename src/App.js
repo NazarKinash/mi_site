@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Phonebook from "./components/Phonebook/Phonebook";
 import Header from "./components/Header/Header";
 import RegisterForm from "./components/Forms/RegisterForm/RegisterForm";
 import LoginForm from "./components/Forms/LoginForm/LoginForm";
@@ -13,7 +12,9 @@ import { auth } from "./configFB";
 import { setUser } from "./redux/user/userAction";
 import { isAuth } from "./redux/user/selectors";
 import { token } from "./redux/tokenSlece";
-import { hydrate } from "react-dom";
+import HomePage from "./containers/Home/HomePage";
+import ToDoPage from "./containers/ToDoPage/ToDoPage";
+import ContactsPage from "./containers/ContactsPage/ContactsPage";
 
 const App = () => {
 	const isAuthUser = useSelector((state) => isAuth(state));
@@ -24,7 +25,6 @@ const App = () => {
 	useEffect(() => {
 		if (!!isTocken) {
 			auth.onAuthStateChanged((user) => dispatch(setUser(user)));
-			// dispatch(setUser(auth.currentUser));
 		}
 	}, [dispatch, history, isTocken]);
 
@@ -38,10 +38,12 @@ const App = () => {
 		<div className="App">
 			<Header />
 			<Switch>
-				<PrivatRoute exact path="/" component={Phonebook} />
 				<Route path="/login" component={LoginForm} />
 				<Route path="/signUp" component={RegisterForm} />
+				<PrivatRoute exact path="/" component={HomePage} />
 				<PrivatRoute path="/profile" component={UserProfile} />
+				<PrivatRoute path="/todolist" component={ToDoPage} />
+				<PrivatRoute path="/contacts" component={ContactsPage} />
 			</Switch>
 		</div>
 	);

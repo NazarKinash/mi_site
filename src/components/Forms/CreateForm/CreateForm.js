@@ -21,7 +21,6 @@ const CreateForm = () => {
 			number: "",
 		},
 		onSubmit: (values) => {
-			console.log(values);
 			dispatch(asyncAddContact("contacts", values));
 		},
 

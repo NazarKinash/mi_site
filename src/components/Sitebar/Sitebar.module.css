@@ -1,0 +1,25 @@
+.Sitebar {
+	width: 330px;
+	height: calc(100vh - 60px);
+	margin-top: 60px;
+
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid #020138;
+}
+
+.SitebarItem {
+	padding: 2px;
+	margin: 2px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	background-color: rgb(44, 160, 53);
+}
+
+.SitebarItem--icon {
+	width: 30px;
+	height: 30px;
+	padding: 4px;
+	border-radius: 50%;
+}

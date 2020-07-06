@@ -5,6 +5,8 @@ import {
 	GET_CONTACTS_SUCSSES,
 	DELETE_CONTACTS_START,
 	DELETE_CONTACTS_SUCSSES,
+	START,
+	SUCSSES,
 } from "../types";
 
 export const addContactLoaderOn = () => ({
@@ -29,4 +31,12 @@ export const deleteContactsLoaderOn = () => ({
 
 export const deleteContactsLoaderOff = () => ({
 	type: DELETE_CONTACTS_SUCSSES,
+});
+
+export const LoaderOn = () => ({
+	type: START,
+});
+
+export const LoaderOff = () => ({
+	type: SUCSSES,
 });
