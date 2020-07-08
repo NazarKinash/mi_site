@@ -3,9 +3,8 @@ body {
 	padding: 0;
 }
 
-.container {
-	width: 85%;
-	margin: 0 auto;
+.Wrapper {
+	padding-top: 60px;
 }
 
 .App {

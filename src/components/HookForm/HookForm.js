@@ -1,10 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
-// import { useDispatch } from "react-redux";
-// import { addTodo } from "../../../redux/actions/todo";
 import "./HookForm.css";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/todoList/toDoSlice";
 import { asyncAddTodo } from "../../redux/operation/operation";
 const HookForm = () => {
 	const dispatch = useDispatch();

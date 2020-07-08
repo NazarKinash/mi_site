@@ -1,35 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
+import Phonebook from "../../components/Phonebook/Phonebook";
 import styles from "./ContactsPage.module.css";
-import { useFormik } from "formik";
+import Button from "../../common/Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	isCreateForm,
+	setIsCreateForm,
+} from "../../redux/createForm/createFormSlice";
+import TransitionWrapper from "../../components/TransitionWeapper/TransitionWrapper";
+import Modal from "../../components/Modal/Modal";
+import CreateForm from "../../components/Forms/CreateForm/CreateForm";
 
 const ContactsPage = () => {
-	const [img, setImg] = useState([]);
-	const formik = useFormik({
-		initialValues: {
-			file: null,
-		},
-		onSubmit: (values) => {
-			if (values.file) {
-				setImg(values.file);
-			}
-		},
-	});
+	const dispatch = useDispatch();
+	const isOpenCreateForm = useSelector((state) => isCreateForm(state));
+
+	const createContactOpen = () => {
+		dispatch(setIsCreateForm());
+	};
+
 	return (
-		<>
-			<form onSubmit={formik.handleSubmit}>
-				<div className={styles.Wrapper}>
-					<input
-						type="file"
-						name="file"
-						value={formik.values.name}
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-					/>
-				</div>
-				<input type="submit" />
-			</form>
-			{!!img.length && <img src={img} alt="" />}
-		</>
+		<div className={styles.Wrapper}>
+			<Button title="Add new contact." onClick={createContactOpen} />
+			<Phonebook />
+			<TransitionWrapper
+				action={isOpenCreateForm}
+				time={250}
+				clases="createForm"
+			>
+				<Modal>
+					<CreateForm />
+				</Modal>
+			</TransitionWrapper>
+		</div>
 	);
 };
 

@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import "./Todo.css";
-import { updateTodo } from "../../redux/todoList/toDoSlice";
 import {
 	asyncRemoveTodo,
 	asyncUpdateTodo,

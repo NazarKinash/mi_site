@@ -12,7 +12,6 @@
 	padding: 2px;
 	margin: 2px;
 	display: flex;
-	justify-content: start;
 	align-items: center;
 	background-color: rgb(44, 160, 53);
 }

@@ -7,6 +7,7 @@ import user from "./user/userReducer";
 import token from "./tokenSlece";
 import todoList from "./todoList/toDoSlice";
 import todoFilter from "./filterTodoSlice/filterTodoSlice";
+import isCreateForm from "./createForm/createFormSlice";
 
 const rootReducer = combineReducers({
 	contacts,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
 	token,
 	todoList,
 	todoFilter,
+	isCreateForm,
 });
 
 export default rootReducer;

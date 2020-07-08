@@ -11,6 +11,7 @@ import { validate } from "./validate";
 import { asyncAddContact } from "../../../redux/operation/operation";
 //Styles
 import formStyles from "../Form.module.css";
+import { setIsCreateForm } from "../../../redux/createForm/createFormSlice";
 
 const CreateForm = () => {
 	const dispatch = useDispatch();
@@ -27,13 +28,14 @@ const CreateForm = () => {
 		validate,
 	});
 
+	const submit = (e) => {
+		formik.handleSubmit(e);
+		dispatch(setIsCreateForm());
+	};
+
 	return (
 		<>
-			<form
-				className={formStyles["form"]}
-				autoComplete="off"
-				onSubmit={formik.handleSubmit}
-			>
+			<form className={formStyles["form"]} autoComplete="off" onSubmit={submit}>
 				<Input
 					value={formik.values.name}
 					onChange={formik.handleChange}

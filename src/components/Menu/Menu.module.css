@@ -10,7 +10,6 @@
 
 .MenuItem {
 	display: flex;
-	justify-content: start;
 }
 
 .MenuItem--img {

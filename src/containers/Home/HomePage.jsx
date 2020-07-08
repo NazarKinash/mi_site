@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Load from "../../common/Loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { loaderSelector } from "../../redux/loader/loaderSelectors";
-import { LoaderOn, LoaderOff } from "../../redux/loader/loaderAction";
+import { LoaderOff } from "../../redux/loader/loaderAction";
 
 const HomePage = () => {
 	const loader = useSelector((state) => loaderSelector(state));
